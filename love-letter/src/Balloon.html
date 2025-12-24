@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloon Pop Effect</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: skyblue;
+        }
+        
+        .balloon-container {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .balloon {
+            width: 50px;
+            height: 70px;
+            background: linear-gradient(to bottom, #ff66b2, #ff3385);
+            border-radius: 50% 50% 45% 45%;
+            position: relative;
+            animation: floatUp 3s ease-in forwards;
+            box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: #cc0044;
+            border-radius: 50%;
+        }
+        
+        .string {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: #555;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            90% {
+                transform: translateY(-300px) scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-300px) scale(1.1);
+                opacity: 0;
+            }
+        }
+        
+        .pop-effect {
+            position: absolute;
+            font-size: 40px;
+            animation: pop 0.5s ease-out forwards;
+            text-align: center;
+            color: white;
+            z-index: 100;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+        
+        @keyframes pop {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .black-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="balloon-container">
+        <div class="balloon">
+            <div class="string"></div>
+        </div>
+    </div>
+    
+    <div class="pop-effect hidden">POP!</div>
+    <div class="black-screen"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const balloon = document.querySelector('.balloon');
+            const popEffect = document.querySelector('.pop-effect');
+            const blackScreen = document.querySelector('.black-screen');
+            
+            // When balloon animation completes (after 3 seconds)
+            setTimeout(() => {
+                // Hide balloon
+                balloon.style.display = 'none';
+                
+                // Show and animate pop effect
+                popEffect.classList.remove('hidden');
+                
+                // After pop animation completes (0.5 seconds)
+                setTimeout(() => {
+                    // Fade to black
+                    blackScreen.style.animation = 'fadeBlack 0.8s forwards';
+                }, 100);
+                
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

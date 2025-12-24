@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparkle Background</title>
+    <style>
+        body {
+            background-color: #000; /* Dark background for better contrast */
+            overflow: hidden; /* Hide overflow from sparkles */
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .sparkle-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow interaction with elements beneath */
+        }
+
+        .sparkle {
+            position: absolute;
+            background-color: #fff; /* White sparkle color */
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle-animation 2s infinite ease-out;
+        }
+
+        @keyframes sparkle-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkle-container">
+        <!-- Add multiple sparkle elements with different positions and delays for variety -->
+        <div class="sparkle" style="left: 10%; top: 20%; width: 5px; height: 5px; animation-delay: 0s;"></div>
+        <div class="sparkle" style="left: 30%; top: 70%; width: 3px; height: 3px; animation-delay: 0.5s;"></div>
+        <div class="sparkle" style="left: 60%; top: 40%; width: 7px; height: 7px; animation-delay: 1s;"></div>
+        <div class="sparkle" style="left: 80%; top: 10%; width: 4px; height: 4px; animation-delay: 1.5s;"></div>
+        <!-- Add more as needed -->
+    </div>
+</body>
+</html>
